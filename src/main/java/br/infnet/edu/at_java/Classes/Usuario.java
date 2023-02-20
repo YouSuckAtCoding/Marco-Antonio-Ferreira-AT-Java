@@ -3,19 +3,42 @@ package br.infnet.edu.at_java.Classes;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+
 public class Usuario{
 	
-	public String Nome;
-	public String Email;
-	public String Password;
+	private String Nome;
+	private String Email;
+	private String Password;
 	
-	public Usuario(String name, String email, String password ) {
-		this.setNome(name);
-		this.setEmail(email);
-		this.setPassword(password);
+	public Usuario() {
+		
 	}
 	
+	public void setNome(String nome) {
+		Nome = nome;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	
+	
+	
+	public String getNome() {
+		return Nome;
+	}
+
+
+	public String getEmail() {
+		return Email;
+	}
+
+
+	public String getPassword() {
+		return Password;
+	}
 	@Override
 	public String toString() {
 
@@ -27,4 +50,6 @@ public class Usuario{
 				
 			);
 	}
+
+	
 }
