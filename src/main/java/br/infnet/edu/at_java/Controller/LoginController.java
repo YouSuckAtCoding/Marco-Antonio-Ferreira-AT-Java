@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.infnet.edu.at_java.Classes.Usuario;
 import br.infnet.edu.at_java.Utility.ValidateLogin;
 import br.infnet.edu.at_java.repositories.UsuarioRepository;
 
+@SessionAttributes("selected")
 @Controller
 public class LoginController {
 	
@@ -27,11 +29,11 @@ public class LoginController {
 	public String Login(@RequestParam String Email,@RequestParam String Password,
 			ModelMap model) {
 		ValidateLogin val = new ValidateLogin();
-		if(val.ValidateLogin(Email, Password)) {
-			List<Usuario> lista = new ArrayList<Usuario>();
-			lista = UsuarioRepository.obterLista();
-			model.put("users", lista);
-			return "usuario/list";
+		int res = val.ValidateLogin(Email, Password);
+		if(res > 0) {
+			Usuario user = UsuarioRepository.obterUsuario(res);
+			model.put("selected", user);
+			return "index";
 		}
 
 		return "login";

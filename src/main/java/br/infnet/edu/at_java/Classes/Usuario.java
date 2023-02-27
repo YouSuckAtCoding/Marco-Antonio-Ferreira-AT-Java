@@ -6,25 +6,22 @@ import lombok.Setter;
 
 public class Usuario{
 	
+	private int Id;
 	private String Nome;
 	private String Email;
 	private String Password;
 	
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+	
 	public Usuario() {
 		
 	}
-	
-	public void setNome(String nome) {
-		Nome = nome;
-	}
-	public void setEmail(String email) {
-		Email = email;
-	}
-	public void setPassword(String password) {
-		Password = password;
-	}
-	
-	
 	
 	public String getNome() {
 		return Nome;
@@ -39,6 +36,19 @@ public class Usuario{
 	public String getPassword() {
 		return Password;
 	}
+	public void setNome(String nome) {
+		Nome = nome;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 

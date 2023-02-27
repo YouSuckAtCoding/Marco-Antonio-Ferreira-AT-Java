@@ -1,24 +1,26 @@
 package br.infnet.edu.at_java.Utility;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.infnet.edu.at_java.Classes.Usuario;
 import br.infnet.edu.at_java.repositories.UsuarioRepository;
 
 public class ValidateLogin {
 	
-	private static List<Usuario> lista = new ArrayList<Usuario>();
+	private static Map<Integer, Usuario> lista = new HashMap<Integer, Usuario>();
 	
-	public boolean ValidateLogin(String email, String password) {
+	public int ValidateLogin(String email, String password) {
 		
 		lista = UsuarioRepository.obterLista();
-		for(Usuario user : lista) {
+		for(Usuario user : lista.values()) {
 			String emailCheck = user.getEmail();
 			String passwordCheck = user.getPassword();
 			if(emailCheck.equals(email)  &&  passwordCheck.equals(password))
-				return true;
+				return user.getId();
 		}
-		return false;
+		return -1;
 	}
 }

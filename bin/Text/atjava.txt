@@ -1,0 +1,4 @@
+Compra;bjRD;Marco Antonio;123456789;marco@marco.com;12 dez. 2022
+C;Strinberg Clg 45;Guitarra;900.0;6
+S;Flauta Doce;Flauta;600.0;Madeira;Tenor
+P;TAMA ImperialStar;Bateria;8000.0;false;Idiofone
