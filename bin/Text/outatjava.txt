@@ -1,0 +1,6 @@
+Código da Compra: D0TW Data da Compra: 2022-12-12
+Responsavel: Marco Antonio Cpf: 123456789 Email: marco@marco.com
+Produtos: 
+Nome: Strinberg Clg 45 Tipo: Guitarra Preco R$:900.0 NumCordas: 6
+Nome: Flauta Doce Tipo: Flauta Preco R$:600.0 Material: Madeira Classificação: Tenor
+Nome: TAMA ImperialStar Tipo: Bateria Preco R$:8000.0 Capacidade Afinação: Não Producao de Som: Idiofone
