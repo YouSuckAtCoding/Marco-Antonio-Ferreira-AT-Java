@@ -7,26 +7,24 @@ public class Percurssao extends Instrumento {
 
     private boolean CapacidadeAfinacao; 
 
-    private String ProducaoSom;    
+   
 
-    public Percurssao(String nome, String tipo, double preco, boolean capacidadeAfinacao, String producaoSom) throws Exception {
-        super(nome, tipo, preco);
-        
-         var check = ValidateData(producaoSom);
-         if(check != null)
-         {
-             throw check;
-         }
-            
-         this.CapacidadeAfinacao = capacidadeAfinacao;
-         this.ProducaoSom = producaoSom; 
-    }
+	private String ProducaoSom;    
+
+   
     @Override
     public double CalcularValorParcelado(int parcelas) {
         double valor = ((this.getPreco() * 1.1) / parcelas);       
         return valor;
     }
     
+    public void setCapacidadeAfinacao(boolean capacidadeAfinacao) {
+		CapacidadeAfinacao = capacidadeAfinacao;
+	}
+
+	public void setProducaoSom(String producaoSom) {
+		ProducaoSom = producaoSom;
+	}
     public boolean isCapacidadeAfinacao() {
         return CapacidadeAfinacao;
     }

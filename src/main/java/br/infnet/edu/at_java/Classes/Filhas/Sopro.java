@@ -8,27 +8,23 @@ public class Sopro extends Instrumento{
 
     private String Material;
 
-    private String Classificacao;
+    
+	private String Classificacao;
 
-    public Sopro(String nome, String tipo, double preco, String material, String classificacao) throws Exception  {
-        super(nome, tipo, preco);
-         
-            var check = ValidateData(material, classificacao);
-            if(check != null)
-            {
-                throw check;
-            }   
-            
-            this.Material = material;
-            this.Classificacao = classificacao;
-        
-    }
+    
 
     @Override
     public double CalcularValorParcelado(int parcelas) {
         double valor = ((this.getPreco() * 1.05) / parcelas);       
         return valor;
     }
+    public void setMaterial(String material) {
+		Material = material;
+	}
+
+	public void setClassificacao(String classificacao) {
+		Classificacao = classificacao;
+	}
 
     public String getMaterial() {
         return Material;

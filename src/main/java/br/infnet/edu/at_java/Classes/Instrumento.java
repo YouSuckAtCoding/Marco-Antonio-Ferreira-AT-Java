@@ -6,28 +6,39 @@ import br.infnet.edu.at_java.Exceptions.NullPrecoException;
 
 public abstract class Instrumento {
     
-    private String Nome;
+    private int Id;
+	
+	
+
+	private String Nome;
     
     private String Tipo;
 
     private double Preco;
+    
 
-    public Instrumento(String nome, String Tipo, double preco) throws Exception {
-                   
-        var check = ValidateData(nome, Tipo, preco);
-        if(check != null){
-            throw check;
-        }
-        
-        this.Nome = nome;
-        this.Preco = preco;
-        this.Tipo = Tipo;
-        
-        
-    }
 
     public abstract double CalcularValorParcelado(int parcelas);
 
+    public void setId(int id) {
+		Id = id;
+	}
+
+	public void setNome(String nome) {
+		Nome = nome;
+	}
+
+	public void setTipo(String tipo) {
+		Tipo = tipo;
+	}
+
+	public void setPreco(double preco) {
+		Preco = preco;
+	}
+	
+    public int getId() {
+		return Id;
+	}
     public String getNome() {
         return Nome;
     }
