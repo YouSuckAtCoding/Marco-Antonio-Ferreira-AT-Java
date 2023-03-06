@@ -1,7 +1,9 @@
 package br.infnet.edu.at_java.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import br.infnet.edu.at_java.Classes.Usuario;
@@ -28,5 +30,10 @@ public class UsuarioController{
 		return "login";
 	}
 	
+	@DeleteMapping(value = "/user/delete/{id}")
+	public String Delete(@PathVariable int id) {
+		UsuarioRepository.removerUsuario(id);
+		return "";
+	}
 	
 }

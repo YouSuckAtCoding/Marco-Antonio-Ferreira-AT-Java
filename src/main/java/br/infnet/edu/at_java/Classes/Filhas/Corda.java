@@ -6,25 +6,16 @@ import br.infnet.edu.at_java.Exceptions.NullNumeroCordasException;
 public class Corda extends Instrumento {
 
     private int NumCordas;
-
-    public Corda(String nome, String tipo, double preco, int numcordas) throws Exception{
-        super(nome, tipo, preco);
-        
-        var check = ValidateData(numcordas);
-        if(check != null)
-        {
-            throw check;
-        }   
-        
-        this.NumCordas = numcordas;   
-        
-    }
-
-    @Override
+   
+    
+	@Override
     public double CalcularValorParcelado(int parcelas) {
         double valor = (this.getPreco() / parcelas);       
         return valor;
     }
+	public void setNumCordas(int numCordas) {
+		NumCordas = numCordas;
+	}
 
     public int getNumCordas() {
         return NumCordas;

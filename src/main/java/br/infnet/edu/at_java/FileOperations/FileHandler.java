@@ -147,26 +147,20 @@ public class FileHandler {
           compra = new Compra(fields[1], new Responsavel(fields[2], fields[3], fields[4]), localDate, instrumentos);
           break;
 
-          case "P":
-          double precoPercurssao = Double.parseDouble(fields[3]);
-          boolean capacidade = Boolean.parseBoolean(fields[4]);
-          Percurssao percurssao = new Percurssao(fields[1], fields[2], precoPercurssao, capacidade, fields[5]);
-          instrumentos.add(percurssao);
-          break;
-
-          case "S":
-          double precoSopro = Double.parseDouble(fields[3]);
-          Sopro sopro = new Sopro(fields[1], fields[2], precoSopro, fields[4], fields[5]);
-          instrumentos.add(sopro);
-          break;
-
-          case "C":
-          double precoCorda = Double.parseDouble(fields[3]);
-          int numcordas = Integer.parseInt(fields[4]);
-          Corda corda = new Corda(fields[1], fields[2], precoCorda, numcordas);
-          instrumentos.add(corda);
-          break;
-          
+		/*
+		 * case "P": double precoPercurssao = Double.parseDouble(fields[3]); boolean
+		 * capacidade = Boolean.parseBoolean(fields[4]); Percurssao percurssao = new
+		 * Percurssao(fields[1], fields[2], precoPercurssao, capacidade, fields[5]);
+		 * instrumentos.add(percurssao); break;
+		 * 
+		 * case "S": double precoSopro = Double.parseDouble(fields[3]); Sopro sopro =
+		 * new Sopro(fields[1], fields[2], precoSopro, fields[4], fields[5]);
+		 * instrumentos.add(sopro); break;
+		 * 
+		 * case "C": double precoCorda = Double.parseDouble(fields[3]); int numcordas =
+		 * Integer.parseInt(fields[4]); Corda corda = new Corda(fields[1], fields[2],
+		 * precoCorda, numcordas); instrumentos.add(corda); break;
+		 */
           default:
           System.out.println("Registro inválido!!!");
 						break;
