@@ -4,8 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import br.infnet.edu.at_java.Classes.Usuario;
 
+@Repository
 public class UsuarioRepository {
 	
 	private static Integer id = 1;
@@ -13,7 +16,7 @@ public class UsuarioRepository {
 	private static Map<Integer, Usuario> userMap = new HashMap<Integer, Usuario>();
 
 
-	public static boolean incluir(Usuario usuario) {
+	public  boolean incluir(Usuario usuario) {
 		usuario.setId(id++);
 		
 		try {
@@ -25,13 +28,13 @@ public class UsuarioRepository {
 		
 	}
 
-	public static Map<Integer, Usuario> obterLista(){
+	public static  Map<Integer, Usuario> obterLista(){
 		return userMap;
 	}
 	public static Usuario obterUsuario(int id){
 		return userMap.get(id);
 	}
-	public static Usuario removerUsuario(int id){
+	public  Usuario removerUsuario(int id){
 		return userMap.remove(id);
 	}
 }

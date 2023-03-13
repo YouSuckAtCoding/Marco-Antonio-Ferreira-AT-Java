@@ -1,6 +1,8 @@
 package br.infnet.edu.at_java.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,13 +12,19 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.infnet.edu.at_java.Classes.Filhas.Sopro;
 import br.infnet.edu.at_java.repositories.SoproRepository;
+import br.infnet.edu.at_java.services.SoproService;
+
 
 @SessionAttributes("sopro")
 @Controller
 public class SoproController{
 	
+	@Autowired
+	private SoproService _sopro;
+	
 	@GetMapping("/listsopro")
-	public String Lista() {
+	public String Lista(Model model) {
+		model.addAttribute("sopro" , _sopro.obterLista());
 		return "sopro/listsopro";
 	}
 	@GetMapping("/inserirSopro")
@@ -25,13 +33,12 @@ public class SoproController{
 	}
 	@PostMapping("/inserirSopro")
 	public String Create(Sopro sopro, ModelMap model) {
-		SoproRepository.incluir(sopro);
-		model.put("sopro", SoproRepository.obterLista());
-		return "sopro/listsopro";
+		_sopro.incluir(sopro);
+		return "redirect:/listsopro";
 	}
 	@GetMapping(value = "/sopro/delete/{id}")
 	public String Delete(@PathVariable int id) {
-		SoproRepository.removerSopro(id);
+		_sopro.excluir(id);
 		return "redirect:/listsopro";
 	}
 	

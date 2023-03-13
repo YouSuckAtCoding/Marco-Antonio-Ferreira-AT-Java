@@ -1,22 +1,27 @@
 package br.infnet.edu.at_java.repositories;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.infnet.edu.at_java.Classes.Filhas.Percurssao;
+import org.springframework.stereotype.Repository;
 
+import br.infnet.edu.at_java.Classes.Filhas.Percurssao;
+import br.infnet.edu.at_java.repositories.DataLoaders.PercussaoDataLoader;
+
+@Repository
 public class PercurssaoRepository {
 private static Integer id = 1;
 	
-	private static Map<Integer, Percurssao> percurssaoMap = new HashMap<Integer, Percurssao>();
+	private static Collection<Percurssao> percurssaoMap = new ArrayList<Percurssao>();
 
 
-	public static boolean incluir(Percurssao percurssao) {
+	public  boolean incluir(Percurssao percurssao) {
 		percurssao.setId(id++);
 		
 		try {
-			percurssaoMap.put(percurssao.getId(), percurssao);
+			percurssaoMap.add(percurssao);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -24,14 +29,31 @@ private static Integer id = 1;
 		
 	}
 
-	public static Collection<Percurssao> obterLista(){
-		return percurssaoMap.values();
+	public  Collection<Percurssao> obterLista(){
+		PercussaoDataLoader pdl = new PercussaoDataLoader();
+		for(Percurssao perc : pdl.ReadFile()) {
+			percurssaoMap.add(perc);
+		}
+			
+		
+		return percurssaoMap;
 	}
-	public static Percurssao obterSopro(int id){
-		return percurssaoMap.get(id);
+	public  Percurssao obterSopro(int id){
+		for(Percurssao perc : percurssaoMap) {
+			if(perc.getId() == id) {
+				return perc;
+			}
+		}
+		
+		return new Percurssao();
 	}
-	public static String removerPercussao(int id){
-		percurssaoMap.remove(id);
+	public  String removerPercussao(int id){
+		for(Percurssao perc : percurssaoMap) {
+			if(perc.getId() == id) {
+				percurssaoMap.remove(perc);
+			}
+		}
+		
 	 	return "Removido";
 	}
 }
