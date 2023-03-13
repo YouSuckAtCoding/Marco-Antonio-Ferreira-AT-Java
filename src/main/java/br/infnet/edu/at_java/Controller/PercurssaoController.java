@@ -1,5 +1,6 @@
 package br.infnet.edu.at_java.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,13 +11,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.infnet.edu.at_java.Classes.Filhas.Percurssao;
 import br.infnet.edu.at_java.repositories.PercurssaoRepository;
+import br.infnet.edu.at_java.services.PercussaoService;
 
 @SessionAttributes("percussao")
 @Controller
 public class PercurssaoController {
+	
+	@Autowired
+	private PercussaoService percussaoService;
+	
 	@GetMapping("/listpercussao")
 	public String Lista(ModelMap model) {
-		model.put("percussao", PercurssaoRepository.obterLista());
+		model.put("percussao", percussaoService.obterLista());
 		return "percurssao/listpercussao";
 	}
 	@GetMapping("/inserirPercussao")
@@ -25,12 +31,12 @@ public class PercurssaoController {
 	}
 	@PostMapping("/inserirPercussao")
 	public String Create(Percurssao percussao) {
-		PercurssaoRepository.incluir(percussao);
+		percussaoService.incluir(percussao);
 		return "redirect:/listpercussao";
 	}
 	@GetMapping(value = "/percussao/delete/{id}")
 	public String Delete(@PathVariable int id) {
-		PercurssaoRepository.removerPercussao(id);
+		percussaoService.excluir(id);
 		return "redirect:/listpercussao";
 	}
 }
