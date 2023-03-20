@@ -3,7 +3,12 @@ package br.infnet.edu.at_java.Classes.Filhas;
 import br.infnet.edu.at_java.Classes.Instrumento;
 import br.infnet.edu.at_java.Exceptions.InvalidClassificationException;
 import br.infnet.edu.at_java.Exceptions.InvalidMaterialException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+
+@Entity
+@Table(name = "Sopro")
 public class Sopro extends Instrumento{
 
     private String Material;

@@ -1,15 +1,26 @@
 package br.infnet.edu.at_java.Classes;
 
+
 import br.infnet.edu.at_java.Exceptions.InvalidNameException;
 import br.infnet.edu.at_java.Exceptions.InvalidTipoException;
 import br.infnet.edu.at_java.Exceptions.NullPrecoException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "Instrumento")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Instrumento {
     
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 	
-	
-
 	private String Nome;
     
     private String Tipo;

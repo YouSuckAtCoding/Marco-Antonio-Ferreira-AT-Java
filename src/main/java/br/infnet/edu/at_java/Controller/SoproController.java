@@ -33,11 +33,12 @@ public class SoproController{
 	}
 	@PostMapping("/inserirSopro")
 	public String Create(Sopro sopro, ModelMap model) {
+		
 		_sopro.incluir(sopro);
 		return "redirect:/listsopro";
 	}
 	@GetMapping(value = "/sopro/delete/{id}")
-	public String Delete(@PathVariable int id) {
+	public String Delete(@PathVariable Long id) {
 		_sopro.excluir(id);
 		return "redirect:/listsopro";
 	}

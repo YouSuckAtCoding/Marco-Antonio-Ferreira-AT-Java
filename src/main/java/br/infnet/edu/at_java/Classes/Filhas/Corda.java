@@ -2,7 +2,11 @@ package br.infnet.edu.at_java.Classes.Filhas;
 
 import br.infnet.edu.at_java.Classes.Instrumento;
 import br.infnet.edu.at_java.Exceptions.NullNumeroCordasException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "Corda")
 public class Corda extends Instrumento {
 
     private int NumCordas;

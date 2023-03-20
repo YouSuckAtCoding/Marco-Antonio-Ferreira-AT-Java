@@ -2,6 +2,7 @@ package br.infnet.edu.at_java.services;
 
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,15 @@ public class SoproService {
 	private SoproRepository _sopro;
 	
 	public Sopro incluir(Sopro sopro) {
-		_sopro.incluir(sopro);
+		_sopro.save(sopro);
 		return sopro;
 	}
 
-	public void excluir(Integer key) {
-		_sopro.removerSopro(key);
+	public void excluir(Long key) {
+		_sopro.deleteById(key);
 	}
 
-	public Collection<Sopro> obterLista(){
-		return (Collection<Sopro>) _sopro.obterLista();
+	public List<Sopro> obterLista(){
+		return _sopro.findAll();
 	}
 }
