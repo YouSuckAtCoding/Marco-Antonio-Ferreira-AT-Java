@@ -1,11 +1,24 @@
 package br.infnet.edu.at_java.Classes;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedStoredProcedureQuery;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureParameter;
+import jakarta.persistence.Table;
 
-
+@Entity
+@Table(name = "Usuario")
+@NamedStoredProcedureQuery(name = "Login",
+procedureName = "Login",parameters = {@StoredProcedureParameter(mode = ParameterMode.IN,name = "EmailParam",type=String.class), 
+@StoredProcedureParameter(mode = ParameterMode.IN,name = "PasswordParam",type=String.class)}, 
+resultClasses = Usuario.class )
 public class Usuario{
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	private String Nome;
 	private String Email;

@@ -1,5 +1,6 @@
 package br.infnet.edu.at_java.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,12 +12,18 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import br.infnet.edu.at_java.Classes.Filhas.Corda;
 
 import br.infnet.edu.at_java.repositories.CordasRepository;
+import br.infnet.edu.at_java.services.CordaService;
 
 @SessionAttributes("cordas")
 @Controller
 public class CordasController {
+	
+	@Autowired
+	private CordaService _corda;
+	
 	@GetMapping("/listcordas")
-	public String Lista() {
+	public String Lista(ModelMap model) {
+		model.put("cordas", _corda.obterLista());
 		return "cordas/listcordas";
 	}
 	@GetMapping("/inserirCordas")
@@ -24,14 +31,13 @@ public class CordasController {
 		return "cordas/cadastrar";
 	}
 	@PostMapping("/inserirCordas")
-	public String Create(Corda corda, ModelMap model) {
-		CordasRepository.incluir(corda);
-		model.put("cordas", CordasRepository.obterLista());
-		return "cordas/listcordas";
+	public String Create(Corda corda) {
+		_corda.incluir(corda);
+		return "redirect:/listcordas";
 	}
 	@GetMapping(value = "/corda/delete/{id}")
-	public String Delete(@PathVariable int id) {
-		CordasRepository.removerCorda(id);
+	public String Delete(@PathVariable Long id) {
+		_corda.excluir(id);
 		return "redirect:/listcordas";
 	}
 }

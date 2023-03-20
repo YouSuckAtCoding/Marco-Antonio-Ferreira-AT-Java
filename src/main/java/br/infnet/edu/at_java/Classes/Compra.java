@@ -4,42 +4,58 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+
+
 import br.infnet.edu.at_java.Exceptions.InvalidCodigoCompraException;
 import br.infnet.edu.at_java.Exceptions.NoInstrumentoException;
 import br.infnet.edu.at_java.Exceptions.NullResponsavelException;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "Compra")
 public class Compra {
 
-    private String CodCompra;
-   
-    private Responsavel Responsavel;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int Id;
+	
+	@OneToOne(cascade = CascadeType.DETACH) 
+	@JoinColumn(name = "UsuarioId")
+    private Usuario Responsavel;
    
     private LocalDate DataCompra;
-   
+    @ManyToMany(cascade = CascadeType.DETACH)
     private List<Instrumento> Produtos;
+    
+    public void setCodCompra(int id) {
+		Id = id;
+	}
 
-    public Compra(String codcompra, Responsavel responsavel, LocalDate datacompra, List<Instrumento> produtos) throws Exception {
-        
-          
-            var check = ValidateData(codcompra, responsavel, datacompra, produtos);
-            if(check != null)
-            {
-                throw check;
-            }   
-            
-            this.CodCompra = codcompra;
-            this.Responsavel = responsavel;
-            this.DataCompra = datacompra;
-            this.Produtos = produtos;
-        
-        
-    }
+	public void setResponsavel(Usuario responsavel) {
+		Responsavel = responsavel;
+	}
 
-    public String getCodCompra() {
-        return CodCompra;
+	public void setDataCompra(LocalDate dataCompra) {
+		DataCompra = dataCompra;
+	}
+
+	public void setProdutos(List<Instrumento> produtos) {
+		Produtos = produtos;
+	}
+
+	public int getId() {
+        return Id;
     }
     
-    public Responsavel getResponsavel() {
+    public Usuario getResponsavel() {
         return Responsavel;
     }
 
@@ -53,33 +69,7 @@ public class Compra {
         return Produtos;
     }
 
-    @Override
-    public String toString(){
-        StringBuilder str = new StringBuilder();
-        str.append("Código da Compra: ");
-        str.append(CodCompra);
-        str.append(" Data da Compra: ");
-        str.append(DataCompra);
-        str.append("\n");
-        str.append("Responsavel: ");
-        str.append(Responsavel.getNome());
-        str.append(" Cpf: ");
-        str.append(Responsavel.getCpf());
-        str.append(" Email: ");
-        str.append(Responsavel.getEmail());
-        str.append("\n");
-        str.append("Produtos: ");
-        str.append("\n");
-        for (Instrumento instrumento : Produtos) 
-        {
-            
-            str.append(instrumento);
-            str.append("\n");
-        }
-
-        return str.toString();
-    }
-    
+  
     private Exception ValidateData(String codcompra, Responsavel responsavel, LocalDate datacompra, List<Instrumento> produtos){
         if(codcompra.length() <= 0 || codcompra == null){
             return new InvalidCodigoCompraException("O atributo Codígo da Compra não pode ser vazio.");

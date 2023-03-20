@@ -17,7 +17,7 @@
 <form action="/inserirCordas" method="post">
 	<h1>Cadastro de Instrumento de Corda</h1>
 	<div class="mb-3">
-	  	<label for="NameInput" class="form-label">Name</label>
+	  	<label for="NameInput" class="form-label">Nome</label>
 	  	<input type="text" class="form-control" id="NameInput" placeholder="Name" name="Nome">
 	</div>
 	<div class="mb-3">

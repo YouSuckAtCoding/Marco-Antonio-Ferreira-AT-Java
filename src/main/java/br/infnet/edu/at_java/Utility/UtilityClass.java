@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.infnet.edu.at_java.Classes.Instrumento;
 import br.infnet.edu.at_java.Classes.Filhas.Corda;
-import br.infnet.edu.at_java.Classes.Filhas.Percurssao;
+import br.infnet.edu.at_java.Classes.Filhas.Percussao;
 import br.infnet.edu.at_java.Classes.Filhas.Sopro;
 
 public class UtilityClass {
@@ -46,7 +46,7 @@ public class UtilityClass {
     public char checkInstrumento(Instrumento inst) 
 	{
 		
-		if(inst instanceof Percurssao){
+		if(inst instanceof Percussao){
 			return 'P';
 		}
 		if(inst instanceof Sopro){

@@ -1,12 +1,11 @@
 package br.infnet.edu.at_java.services;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.infnet.edu.at_java.Classes.Usuario;
-import br.infnet.edu.at_java.Utility.ValidateLogin;
 import br.infnet.edu.at_java.repositories.UsuarioRepository;
 
 @Service
@@ -16,27 +15,28 @@ public class UsuarioService {
 	private UsuarioRepository _usuario;
 	
 	public Usuario autenticar(Usuario usuario) {
-		ValidateLogin val = new ValidateLogin();
-		int res = val.ValidateLogin(usuario.getEmail(), usuario.getPassword());
-		if(res > 0) {
-			Usuario user = UsuarioRepository.obterUsuario(res);
-			return user;
-		}
+		
 		return new Usuario();
 		
 		
 	}
 
 	public Usuario incluir(Usuario usuario) {
-		_usuario.incluir(usuario);
+		_usuario.save(usuario);
 		return usuario;
 	}
 
-	public void excluir(Integer key) {
-		_usuario.removerUsuario(key);
+	public void excluir(Long key) {
+		_usuario.deleteById(key);;
 	}
 
-	public Collection<Usuario> obterLista(){
-		return (Collection<Usuario>) _usuario.obterLista();
+	public List<Usuario> obterLista(){
+		return _usuario.findAll();
+	}
+	
+	public Usuario login(String Email, String Password) {
+		Usuario logged =_usuario.Login(Email, Password);
+		return logged;
+		
 	}
 }
