@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<title>Instrumentos de Percussão</title>
+<title>Responsáveis</title>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -18,20 +18,16 @@
   <thead>
     <tr>
       <th>Nome</th>
-      <th>Tipo</th>
-      <th>Capacidade de Afinação</th>
-      <th>Preço</th>
-      <th>Remover Item</th>
+      <th>Email</th>
+      <th>Cpf</th>
     </tr>
   </thead>
-  <c:forEach items="${percussao}" var="percussao">
+  <c:forEach items="${responsaveis}" var="responsaveis">
   <tbody>
     <tr>
-      <td><c:out value="${percussao.nome}"></c:out></td>
-      <td><c:out value="${percussao.tipo}"></c:out></td>
-      <td><c:out value="${percussao.capacidadeAfinacao}"></c:out></td>
-      <td><c:out value="${percussao.preco}"></c:out></td>
-      <td><a class="btn btn-outline-danger" href="/percussao/delete/${percussao.id}">Remover</a></td>
+      <td><c:out value="${responsaveis.nome}"></c:out></td>
+      <td><c:out value="${responsaveis.email}"></c:out></td>
+      <td><c:out value="${responsaveis.cpf}"></c:out></td>
     </tr>
     </c:forEach>
   </tbody>
