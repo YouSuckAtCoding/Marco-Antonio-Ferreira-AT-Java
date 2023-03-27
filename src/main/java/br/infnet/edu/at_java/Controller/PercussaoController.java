@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.infnet.edu.at_java.Classes.Filhas.Percussao;
 import br.infnet.edu.at_java.repositories.PercussaoRepository;
+import br.infnet.edu.at_java.repositories.DataLoaders.PercussaoLoader;
 import br.infnet.edu.at_java.services.PercussaoService;
 
 @SessionAttributes("percussao")
@@ -22,6 +23,11 @@ public class PercussaoController {
 	
 	@GetMapping("/listpercussao")
 	public String Lista(ModelMap model) {
+		if(percussaoService.obterLista().isEmpty()) {
+			PercussaoLoader pl = new PercussaoLoader();
+			percussaoService.incluir(pl.SetPoercussao());	
+		}
+		
 		model.put("percussao", percussaoService.obterLista());
 		return "percurssao/listpercussao";
 	}

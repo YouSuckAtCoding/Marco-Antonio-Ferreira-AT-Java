@@ -16,31 +16,70 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedStoredProcedureQuery;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureParameter;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Compra")
+@NamedStoredProcedureQuery(name = "GetCompraByUsuarioId",
+procedureName = "GetCompraByUsuarioId",
+parameters = {@StoredProcedureParameter(mode = ParameterMode.IN,name = "UsuarioIdParam",type=int.class)},
+resultClasses = Compra.class )
 public class Compra {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 	
-	@OneToOne(cascade = CascadeType.DETACH) 
+	@ManyToOne(cascade = CascadeType.DETACH) 
 	@JoinColumn(name = "UsuarioId")
-    private Usuario Responsavel;
+    private Usuario usuario;
    
-    private LocalDate DataCompra;
+	@OneToOne
+	@JoinColumn(name = "ResponsavelId")
+	private Responsavel responsavel;
+	
+	private LocalDate DataCompra;
+    
     @ManyToMany(cascade = CascadeType.DETACH)
     private List<Instrumento> Produtos;
     
+    private double Total;
+    
+    public double getTotal() {
+		return Total;
+	}
+
+	public void setTotal(double total) {
+		Total = total;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public void setResponsavel(Responsavel responsavel) {
+		this.responsavel = responsavel;
+	}
+	
     public void setCodCompra(int id) {
 		Id = id;
 	}
 
-	public void setResponsavel(Usuario responsavel) {
-		Responsavel = responsavel;
+	public void setResponsavel(Usuario usuario) {
+		usuario = usuario;
 	}
 
 	public void setDataCompra(LocalDate dataCompra) {
@@ -56,7 +95,7 @@ public class Compra {
     }
     
     public Usuario getResponsavel() {
-        return Responsavel;
+        return usuario;
     }
 
     public String getDataCompra() {

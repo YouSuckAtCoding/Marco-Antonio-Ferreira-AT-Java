@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.infnet.edu.at_java.Classes.Filhas.Sopro;
 import br.infnet.edu.at_java.repositories.SoproRepository;
+import br.infnet.edu.at_java.repositories.DataLoaders.SoproLoader;
 import br.infnet.edu.at_java.services.SoproService;
 
 
@@ -24,6 +25,10 @@ public class SoproController{
 	
 	@GetMapping("/listsopro")
 	public String Lista(Model model) {
+		if(_sopro.obterLista().isEmpty()) {
+			SoproLoader sl = new SoproLoader();
+			_sopro.incluir(sl.SetSopro());	
+		}
 		model.addAttribute("sopro" , _sopro.obterLista());
 		return "sopro/listsopro";
 	}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import br.infnet.edu.at_java.Classes.Filhas.Corda;
 
 import br.infnet.edu.at_java.repositories.CordasRepository;
+import br.infnet.edu.at_java.repositories.DataLoaders.CordaLoader;
 import br.infnet.edu.at_java.services.CordaService;
 
 @SessionAttributes("cordas")
@@ -23,6 +24,10 @@ public class CordasController {
 	
 	@GetMapping("/listcordas")
 	public String Lista(ModelMap model) {
+		if(_corda.obterLista().isEmpty()) {
+			CordaLoader cl = new CordaLoader();
+			_corda.incluir(cl.SetCordas());	
+		}
 		model.put("cordas", _corda.obterLista());
 		return "cordas/listcordas";
 	}

@@ -12,7 +12,6 @@ public class Percussao extends Instrumento {
 
     private boolean CapacidadeAfinacao; 
 
-    private String ProducaoSom;    
 
    
     @Override
@@ -25,15 +24,9 @@ public class Percussao extends Instrumento {
 		CapacidadeAfinacao = capacidadeAfinacao;
 	}
 
-	public void setProducaoSom(String producaoSom) {
-		ProducaoSom = producaoSom;
-	}
+	
     public boolean isCapacidadeAfinacao() {
         return CapacidadeAfinacao;
-    }
-
-    public String getProducaoSom() {
-        return ProducaoSom;
     }
 
     @Override
@@ -44,7 +37,6 @@ public class Percussao extends Instrumento {
 		sb.append(" Capacidade Afinação: ");
 		sb.append(CapacidadeAfinacao ? "Sim" : "Não");
 		sb.append(" Producao de Som: ");
-		sb.append(ProducaoSom);
 		return sb.toString();
 	}
 	

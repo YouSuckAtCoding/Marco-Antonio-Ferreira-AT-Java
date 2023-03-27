@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import br.infnet.edu.at_java.Classes.Usuario;
+import br.infnet.edu.at_java.repositories.DataLoaders.UsuarioLoader;
 import br.infnet.edu.at_java.services.UsuarioService;
 import org.springframework.ui.Model;
 
@@ -20,6 +21,10 @@ public class UsuarioController{
 	
 	@GetMapping("/")
 	public String index(Model model) {
+		if(usuarioService.obterLista().isEmpty()) {
+			UsuarioLoader ul = new UsuarioLoader();
+			usuarioService.incluir(ul.SetUsuarios());	
+		}
 		model.addAttribute("users", usuarioService.obterLista());
 		return "usuario/list";
 	}

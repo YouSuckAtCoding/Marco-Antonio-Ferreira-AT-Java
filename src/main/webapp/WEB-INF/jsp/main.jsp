@@ -42,6 +42,8 @@
             	<li><a class="dropdown-item" href="/inserirCordas">Cadastrar Cordas</a></li>
             	<li><a class="dropdown-item" href="/inserirSopro">Cadastrar Sopro</a></li>
             	<li><a class="dropdown-item" href="/inserirPercussao">Cadastrar Percussão</a></li>
+            	<li><a class="dropdown-item" href="/inserirResponsavel">Cadastrar Responsavel</a></li>
+            	<li><a class="dropdown-item" href="/inserirCompra">Cadastrar Compra</a></li>
             </ul>
        </li>
         	
@@ -54,7 +56,7 @@
 		</c:if>
 		
 		<c:if test="${not empty selected}">
-	      <li><a class="me-4 btn btn-outline-primary" href="#">${selected.nome}</a></li>
+	      <li><a class="me-4 btn btn-outline-primary" href="/listresponsavel">${selected.nome}</a></li>
 	      <li><a href="/logout" class="me-4 btn btn-outline-primary">Logout</a></li>
 	    </c:if>
       </ul>
