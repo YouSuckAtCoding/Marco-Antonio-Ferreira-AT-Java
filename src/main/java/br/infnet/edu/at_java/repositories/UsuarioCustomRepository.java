@@ -5,4 +5,6 @@ import br.infnet.edu.at_java.Classes.Usuario;
 public interface UsuarioCustomRepository {
 	
 	Usuario Login(String Email, String Password); 
+	
+	void DeleteUser(Long key);
 }

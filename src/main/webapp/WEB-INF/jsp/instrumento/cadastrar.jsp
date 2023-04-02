@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<title>Index</title>
+<title>Cadastrar Instrumento</title>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -14,32 +14,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <c:import url="/WEB-INF/jsp/main.jsp"/>
 <div class="d-flex flex-column align-items-center" style="margin-top:10%">
-<form action="/inserir" method="post">
-	<h1>Cadastro de Usuário</h1>
+<form action="/inserirInstrumento" method="post">
+	<h1>Cadastro de Instrumento</h1>
 	<div class="mb-3">
-	  	<label for="NameInput" class="form-label">Name</label>
+	  	<label for="NameInput" class="form-label">Nome</label>
 	  	<input type="text" class="form-control" id="NameInput" placeholder="Name" name="Nome">
 	</div>
 	<div class="mb-3">
-	  <label for="EmailInput" class="form-label">Email</label>
-	 		 <input type="email" class="form-control" id="EmailInput" placeholder="email@email.com" name="Email">
+	  <label for="TipoInput" class="form-label">Tipo</label>
+	 		 <input type="text" class="form-control" id="TipoInput" placeholder="Tipo" name="Tipo">
 	</div>
 	<div class="mb-3">
-	 	 <label for="PasswordInput" class="form-label">Password</label>
-	 	 <input type="password" class="form-control" id="PasswordInput" name="Password"></input>
+	 	 <label for="PrecoInput" class="form-label">Preço</label>
+	 	 <input type="text" class="form-control" id="PrecoInput" name="Preco"></input>
 	</div>
-	
-	<c:if test="${empty endereco}">
-	<div class="mb-3 text-center">
-		<li><a href="/inserirEndereco" class="me-4 btn btn-outline-primary">Cadastrar Endereço</a></li>
-		</div>
-	</c:if>
-	
-	<c:if test="${not empty endereco}">
-	<div class="mb-3">
-	 	 <label for="EnderecoInput" class="form-label">${endereco.bairro}</label>
-	</div>
-	</c:if>
 	<div class="mb-3 text-center">
 		 <button type="submit" class="btn btn-outline-primary w-50" value="Create">Submit</button>
 	</div>

@@ -25,10 +25,7 @@ public class SoproController{
 	
 	@GetMapping("/listsopro")
 	public String Lista(Model model) {
-		if(_sopro.obterLista().isEmpty()) {
-			SoproLoader sl = new SoproLoader();
-			_sopro.incluir(sl.SetSopro());	
-		}
+	
 		model.addAttribute("sopro" , _sopro.obterLista());
 		return "sopro/listsopro";
 	}
@@ -43,8 +40,15 @@ public class SoproController{
 		return "redirect:/listsopro";
 	}
 	@GetMapping(value = "/sopro/delete/{id}")
-	public String Delete(@PathVariable Long id) {
-		_sopro.excluir(id);
+	public String Delete(@PathVariable Long id, Model model) {
+		try {
+			_sopro.excluir(id);	
+		}
+		catch(Exception ex) {
+			model.addAttribute("errodeletesopro", "Erro");
+			return "sopro/listsopro";
+		}
+		
 		return "redirect:/listsopro";
 	}
 	

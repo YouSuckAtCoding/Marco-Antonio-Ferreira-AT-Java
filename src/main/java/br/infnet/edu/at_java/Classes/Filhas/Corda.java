@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Corda")
-public class Corda extends Instrumento {
+public class Corda extends Instrumento implements Comparable<Corda> {
 
     private int NumCordas;
    
@@ -42,4 +42,8 @@ public class Corda extends Instrumento {
         return null;
 
     }
+	@Override
+	public int compareTo(Corda corda) {
+		return this.getNome().compareTo(corda.getNome());
+	}
 }

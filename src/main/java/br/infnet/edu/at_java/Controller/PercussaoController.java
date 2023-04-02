@@ -2,6 +2,7 @@ package br.infnet.edu.at_java.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +24,7 @@ public class PercussaoController {
 	
 	@GetMapping("/listpercussao")
 	public String Lista(ModelMap model) {
-		if(percussaoService.obterLista().isEmpty()) {
-			PercussaoLoader pl = new PercussaoLoader();
-			percussaoService.incluir(pl.SetPoercussao());	
-		}
-		
+			
 		model.put("percussao", percussaoService.obterLista());
 		return "percurssao/listpercussao";
 	}
@@ -41,8 +38,14 @@ public class PercussaoController {
 		return "redirect:/listpercussao";
 	}
 	@GetMapping(value = "/percussao/delete/{id}")
-	public String Delete(@PathVariable Long id) {
-		percussaoService.excluir(id);
+	public String Delete(@PathVariable Long id, Model model) {
+		try {
+			percussaoService.excluir(id);	
+		}
+		catch(Exception ex) {
+			model.addAttribute("errodeletepercussao", "Erro");
+			return "percurssao/listpercussao";
+		}
 		return "redirect:/listpercussao";
 	}
 }

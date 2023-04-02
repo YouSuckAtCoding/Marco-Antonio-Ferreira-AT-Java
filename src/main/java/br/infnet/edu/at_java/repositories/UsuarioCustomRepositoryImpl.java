@@ -23,10 +23,21 @@ public class UsuarioCustomRepositoryImpl implements UsuarioCustomRepository{
 			return new Usuario();
 		}
 		
-		
-		
+	}
+
+	@Override
+	public void DeleteUser(Long UserId) {
+		try {
+			
+			StoredProcedureQuery sp = em.createNamedStoredProcedureQuery("DeleteUserAndRelated").setParameter("UserId", UserId);
+			sp.execute();
+		}
+		catch(Exception ex){
+			
+		}
 		
 	}
+	
 	
 
 }

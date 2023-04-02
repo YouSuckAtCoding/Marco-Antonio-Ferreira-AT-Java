@@ -1,6 +1,7 @@
 package br.infnet.edu.at_java.services;
 
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class PercussaoService {
 	}
 
 	public List<Percussao> obterLista(){
-		return _percussao.findAll();
+		List<Percussao> percs =_percussao.findAll(); 
+		Collections.sort(percs);
+		return percs;
 	}
 }

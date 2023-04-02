@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Percussao")
-public class Percussao extends Instrumento {
+public class Percussao extends Instrumento implements Comparable<Percussao> {
 
     private boolean CapacidadeAfinacao; 
 
@@ -47,4 +47,10 @@ public class Percussao extends Instrumento {
         return null;
 
     }
+
+	@Override
+	public int compareTo(Percussao perc) {
+		return this.getNome().compareTo(perc.getNome());
+		
+	}
 }

@@ -1,6 +1,7 @@
 package br.infnet.edu.at_java.services;
 
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class CordaService {
 	}
 
 	public List<Corda> obterLista(){
-		return _corda.findAll();
+		List<Corda> cordas =_corda.findAll(); 
+		Collections.sort(cordas);
+		return cordas;
 	}
 }

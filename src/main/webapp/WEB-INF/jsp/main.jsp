@@ -17,20 +17,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Loja</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+        <c:if test="${not empty selected}">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="/index" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Produtos
           </a>
+          
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/listcordas">Cordas</a></li>
             <li><a class="dropdown-item" href="/listsopro">Sopro</a></li>
             <li><a class="dropdown-item" href="/listpercussao">Percussão</a></li>
+            <li><a class="dropdown-item" href="/listresponsavel">Responsáveis</a></li>
+            <li><a class="dropdown-item" href="/listcompras">Compras</a></li>
+            <li><a class="dropdown-item" href="/listinstrumentosgerais">Todos os Instrumentos</a></li>
           </ul>
           
         </li>
@@ -38,16 +37,17 @@
           <a class="nav-link dropdown-toggle" href="/index" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Cadastros 
           </a>
-        <ul class="dropdown-menu">
+          
+       		<ul class="dropdown-menu">
             	<li><a class="dropdown-item" href="/inserirCordas">Cadastrar Cordas</a></li>
             	<li><a class="dropdown-item" href="/inserirSopro">Cadastrar Sopro</a></li>
             	<li><a class="dropdown-item" href="/inserirPercussao">Cadastrar Percussão</a></li>
             	<li><a class="dropdown-item" href="/inserirResponsavel">Cadastrar Responsavel</a></li>
             	<li><a class="dropdown-item" href="/inserirCompra">Cadastrar Compra</a></li>
             </ul>
+            </c:if>
        </li>
         	
-         
       </ul>
       <ul class="nav navbar-nav navbar-right">
 	    <c:if test="${empty selected}">
@@ -56,8 +56,18 @@
 		</c:if>
 		
 		<c:if test="${not empty selected}">
-	      <li><a class="me-4 btn btn-outline-primary" href="/listresponsavel">${selected.nome}</a></li>
+	       </li>
+          <li class="nav-item dropdown">
+          <button class="me-4 btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">${selected.nome}</button>
+          
+	      <ul class="dropdown-menu">
+            	<li><a class="dropdown-item" href="/listresponsavel">Responsáveis</a></li>
+            </ul>
+            </li>
+	      
+	      
 	      <li><a href="/logout" class="me-4 btn btn-outline-primary">Logout</a></li>
+	      
 	    </c:if>
       </ul>
     </div>

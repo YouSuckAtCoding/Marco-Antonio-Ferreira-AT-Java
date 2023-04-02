@@ -1,5 +1,6 @@
 package br.infnet.edu.at_java.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public class ResponsavelService {
 	}
 	
 	public List<Responsavel> obterLista(long usuarioId){
-		return _responsavel.GetByUsuario(usuarioId);
+		List<Responsavel> resps =_responsavel.GetByUsuario(usuarioId);
+		Collections.sort(resps);
+		return resps;
 		
 	}
 }
