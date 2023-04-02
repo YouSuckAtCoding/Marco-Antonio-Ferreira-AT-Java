@@ -1,8 +1,12 @@
 package br.infnet.edu.at_java.Classes;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import br.infnet.edu.at_java.Exceptions.InvalidCpfException;
 import br.infnet.edu.at_java.Exceptions.InvalidEmailException;
 import br.infnet.edu.at_java.Exceptions.InvalidNameException;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +24,7 @@ import jakarta.persistence.Table;
 procedureName = "GetResponsavelByUsuarioId",
 parameters = {@StoredProcedureParameter(mode = ParameterMode.IN,name = "UsuarioIdParam",type=int.class)},
 resultClasses = Responsavel.class )
-public class Responsavel {
+public class Responsavel implements Comparable<Responsavel> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
@@ -30,7 +34,7 @@ public class Responsavel {
     private String Cpf;
 
     private String Email;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "UsuarioId")
     private Usuario usuario;
    
@@ -49,30 +53,30 @@ public class Responsavel {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-	public void setNome(String nome) {
-		Nome = nome;
-	}
-
-	public void setCpf(String cpf) {
-		Cpf = cpf;
-	}
-
-	public void setEmail(String email) {
-		Email = email;
-	}
-
+	
 	public String getNome() {
         return Nome;
     }
 
-    public String getCpf() {
-        return Cpf;
-    }
+	public void setNome(String nome) {
+		Nome = nome;
+	}
+	
+	public String getCpf() {
+	        return Cpf;
+	}
+	
+	public void setCpf(String cpf) {
+		Cpf = cpf;
+	}
+	 public String getEmail() {
+	        return Email;
+	    }
+	public void setEmail(String email) {
+		Email = email;
+	}
    
-    public String getEmail() {
-        return Email;
-    }
+   
 
     @Override
     public String toString(){
@@ -101,4 +105,10 @@ public class Responsavel {
         return null;
 
     }
+    
+	@Override
+	public int compareTo(Responsavel responsavel) {
+		return this.getNome().compareTo(responsavel.getNome());
+		
+	}
 }

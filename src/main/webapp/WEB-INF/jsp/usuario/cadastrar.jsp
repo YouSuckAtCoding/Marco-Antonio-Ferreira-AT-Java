@@ -28,6 +28,18 @@
 	 	 <label for="PasswordInput" class="form-label">Password</label>
 	 	 <input type="password" class="form-control" id="PasswordInput" name="Password"></input>
 	</div>
+	
+	<c:if test="${empty endereco}">
+	<div class="mb-3 text-center">
+		<li><a href="/inserirEndereco" class="me-4 btn btn-outline-primary">Cadastrar Endereço</a></li>
+		</div>
+	</c:if>
+	
+	<c:if test="${not empty endereco}">
+	<div class="mb-3">
+	 	 <label for="EnderecoInput" class="form-label">${endereco.bairro}</label>
+	</div>
+	</c:if>
 	<div class="mb-3 text-center">
 		 <button type="submit" class="btn btn-outline-primary w-50" value="Create">Submit</button>
 	</div>

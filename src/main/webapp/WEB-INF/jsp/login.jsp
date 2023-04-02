@@ -15,6 +15,10 @@
 <div class="d-flex flex-column align-items-center" style="margin-top:10%">
 <h1>Por Favor, efetue seu login!!</h1>
 <h3>Caso não tenha uma conta, crie uma no botão abaixo!!</h3>
+<c:if test="${selected == 'Erro'}">
+	<h3 class="text-danger">Login Inválido</h3>
+</c:if>
+
 <form action="/login" method="post">
 	<div class="mb-3">
 	  <label for="EmailInput" class="form-label">Email</label>

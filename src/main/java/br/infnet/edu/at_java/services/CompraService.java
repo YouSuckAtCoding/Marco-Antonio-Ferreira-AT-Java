@@ -1,5 +1,6 @@
 package br.infnet.edu.at_java.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class CompraService {
 	}
 
 	public List<Compra> obterLista(){
-		return _compra.findAll();
+		List<Compra> compras =_compra.findAll();
+		Collections.sort(compras);
+		return compras;
 	}
 }

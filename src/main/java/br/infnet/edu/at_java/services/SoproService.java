@@ -2,6 +2,7 @@ package br.infnet.edu.at_java.services;
 
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class SoproService {
 	}
 
 	public List<Sopro> obterLista(){
-		return _sopro.findAll();
+		List<Sopro> sopros =_sopro.findAll();
+		Collections.sort(sopros);
+		return sopros;
 	}
 }

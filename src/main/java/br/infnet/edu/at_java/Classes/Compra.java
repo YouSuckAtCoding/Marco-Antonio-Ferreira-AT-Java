@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import br.infnet.edu.at_java.Exceptions.InvalidCodigoCompraException;
 import br.infnet.edu.at_java.Exceptions.NoInstrumentoException;
@@ -29,7 +30,7 @@ import jakarta.persistence.Table;
 procedureName = "GetCompraByUsuarioId",
 parameters = {@StoredProcedureParameter(mode = ParameterMode.IN,name = "UsuarioIdParam",type=int.class)},
 resultClasses = Compra.class )
-public class Compra {
+public class Compra implements Comparable<Compra>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +40,9 @@ public class Compra {
 	@JoinColumn(name = "UsuarioId")
     private Usuario usuario;
    
-	@OneToOne
+	@OneToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "ResponsavelId")
-	private Responsavel responsavel;
+	private Responsavel Responsavel;
 	
 	private LocalDate DataCompra;
     
@@ -65,50 +66,41 @@ public class Compra {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public void setResponsavel(Responsavel responsavel) {
-		this.responsavel = responsavel;
-	}
 	
-    public void setCodCompra(int id) {
-		Id = id;
-	}
-
-	public void setResponsavel(Usuario usuario) {
-		usuario = usuario;
-	}
-
-	public void setDataCompra(LocalDate dataCompra) {
-		DataCompra = dataCompra;
-	}
-
-	public void setProdutos(List<Instrumento> produtos) {
-		Produtos = produtos;
-	}
-
 	public int getId() {
         return Id;
     }
-    
-    public Usuario getResponsavel() {
-        return usuario;
-    }
+	public void setId(int id) {
+		Id = id;
+	}
+	 
+	public Responsavel getResponsavel() {
+	   return Responsavel;
+	}
+	 
+	public void setResponsavel(Responsavel responsavel) {
+		this.Responsavel = responsavel;
+	}
+	
 
     public String getDataCompra() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String dataFormatada = formatter.format(DataCompra);
         return dataFormatada;
     }
+    
+	public void setDataCompra(LocalDate dataCompra) {
+		DataCompra = dataCompra;
+	}
+	 public List<Instrumento> getProdutos() {
+	        return Produtos;
+	}
 
-    public List<Instrumento> getProdutos() {
-        return Produtos;
-    }
+	public void setProdutos(List<Instrumento> produtos) {
+		Produtos = produtos;
+	}
 
-  
+	  
     private Exception ValidateData(String codcompra, Responsavel responsavel, LocalDate datacompra, List<Instrumento> produtos){
         if(codcompra.length() <= 0 || codcompra == null){
             return new InvalidCodigoCompraException("O atributo Codígo da Compra não pode ser vazio.");
@@ -122,4 +114,9 @@ public class Compra {
         return null;
 
     }
+
+	@Override
+	public int compareTo(Compra compra) {
+		return this.getDataCompra().compareTo(compra.getDataCompra());
+	}
 }

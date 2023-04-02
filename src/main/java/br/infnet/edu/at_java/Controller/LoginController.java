@@ -37,10 +37,11 @@ public class LoginController {
 			ModelMap model) {
 		Usuario logged = _usuario.login(Email, Password);
 		if(logged.getId() <= 0) {
+			model.put("selected", "Erro");
 			return "login";
 		}
 		model.put("selected", logged);
-		return "main";
+		return "index";
 		
 	}
 }

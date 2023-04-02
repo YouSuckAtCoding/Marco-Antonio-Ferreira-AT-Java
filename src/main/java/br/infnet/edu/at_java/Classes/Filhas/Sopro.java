@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Sopro")
-public class Sopro extends Instrumento{
+public class Sopro extends Instrumento implements Comparable<Sopro>{
 
     private String Material;
 
@@ -63,5 +63,9 @@ public class Sopro extends Instrumento{
         return null;
 
     }
+	@Override
+	public int compareTo(Sopro sopro) {
+		return this.getNome().compareTo(sopro.getNome());
+	}
 	
 }
